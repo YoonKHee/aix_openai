@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>투어</title>
+    <script>
+        function sendBtn(){
+            const send_data = $('#data').val();
+            console.log('데이터: '+ send_data);
+            $.ajax({
+                url:'/ajax_data/',
+                type : 'post',
+                headers : {'X-CSRFToken':'{{ csrf_token }}'},
+                data:{'data':send_data},
+                dataType:'json',
+                success:function(data){
+                    alert('성공')
+                    $('#result').text(data.result);
+                },//success
+                error:function(){
+                    alert('예측하는데 오류가 발생했습니다. 다시 시도해주세요.')
+                }//error
+            })//ajax
+
+        }// sendBtn
+    </script>
+</head>
+<body>
+    <h1>투어검색</h1>
+    <label for="">가고싶은 여향지를 입력하세여.</label><br><br>
+
+    <input type="text" name='data' id='data'>
+    <button type="button" onclick = 'sendBtn()'>검색</button>
+    <div>[여행추천]: <span id = 'result'>-</span></div>
+    
+</body>
+</html>
