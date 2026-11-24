@@ -7,7 +7,7 @@ import anthropic
 from anthropic import Anthropic
 
 # 1. 키 불러오기
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 envFile = BASE_DIR/ '.env'
 load_dotenv(envFile)
 api_key = os.getenv('api_key')
@@ -27,8 +27,9 @@ def ajax_data(request):
             system = ('당신은 여행설계 전문가입니다.\n'
                     f'{txt_input}여행 1박2일로 코스로 짜주세요.\n'
                     '여행일정,여행지,숙소,식사추천을 해주세요.\n'
-                    '이해하기 쉽고 간략하게 답합니다.'),
-            messages = [{'role':'user','content':f'{txt_input}을 가지고 1박2일코스 여행일정,여행지,숙소,식사추천을 제안해주세요'}],
+                    '이해하기 쉽고 간략하게 답합니다.\n'
+                    '가독성 있게 띄어쓰기 줄바꿈 마크다운을 적절히 활용하여 작성합니다.'),
+            messages = [{'role':'user','content':f'{txt_input}을 가지고 1박2일코스 1.여행일정,2.여행지,3.숙소,4.식사추천을 가독성있게 제안해주세요'}],
             max_tokens=1000,
         )
     except anthropic.APIConnectionError as error:

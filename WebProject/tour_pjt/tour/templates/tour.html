@@ -10,7 +10,7 @@
             const send_data = $('#data').val();
             console.log('데이터: '+ send_data);
             $.ajax({
-                url:'/ajax_data/',
+                url:'/tour/ajax_data/',
                 type : 'post',
                 headers : {'X-CSRFToken':'{{ csrf_token }}'},
                 data:{'data':send_data},
